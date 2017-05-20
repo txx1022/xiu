@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>shop</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../common/swiper/swiper-3.3.1.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../common/swiper/animate.css"/>
+	<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/swiper/swiper-3.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/swiper/swiper.animate1.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/zepto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/touch.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	header{height: 0.86rem; font-size: 0.35rem;  color: #fff; line-height: 0.86rem; width: 100%;　
+	         text-align: center;  background: #ad1b1b;    
+	         display: flex; align-items: center; justify-content: center;}
+	header img{  position: absolute; height: 0.52rem; width: 1.04rem; right: 0.2rem;}
+	header span{ margin-left: -0.2rem; }
+	.left{ position: absolute; left: 0.3rem; height: 0.55rem;  width: 0.27rem; }
+ 
+/*body,html{ height: 100%; width: 100%; }
+body{ display: flex;  }
+section{ flex: 1;  overflow: hidden; }           */
+.img img{  height: 4.28rem; width: 100%;  }
+.detail{ font-size: 0.28rem; color: #8a8a8a; }   
+section{ padding: 0 0.3rem; }   
+   
+</style>
+</head>
+<body>
+<header>
+	   <img class="left" src="../img/images/left.png"/>
+		<span>商品资料</span>
+		<img class="shop" src="../img/images/index1.png"/>
+</header>
+<section>
+<div class="img"></div>
+<div class="detail"></div>
+
+ <!-- 添加的商品的信息-->
+ 
+
+
+</section>
+ 
+
+</body>
+<script type="text/javascript">
+window.onload=function(){
+	var myScroll=new IScroll('section')
+	// 获取地址栏中的 id名字
+	var id=location.search.substr(1).split('=')[1]
+	//console.log(id)
+	// 把id存到购物车里面
+	$.ajax({
+		type:"get",
+		url:" http://datainfo.duapp.com/shopdata/getGoods.php",
+		async:true,
+		data:{goodsID:id},
+		dataType:'jsonp',
+		success:function(data){
+			var goods=JSON.parse(data[0].goodsBenUrl)
+			console.log(goods[0])
+			var img=''
+			img='<img src="'+goods[0]+'" />'
+            $('.img').html(img)
+            $('.detail').html(data[0].detail)
+		}	
+	});
+	$('.left').on('tap',function(){
+        	window.location.href='detail.html'
+        })
+	$('.shop').on('tap',function(){
+        	window.location.href='car.html'
+        })
+}	
+</script>
+</html>

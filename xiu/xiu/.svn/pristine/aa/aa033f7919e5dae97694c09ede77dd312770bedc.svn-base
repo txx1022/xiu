@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>login页面</title>
+		<link rel="stylesheet" type="text/css" href="outCss/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+		<script src="libs/zepto.min.js"></script>
+	</head>
+	<body>
+		<header>开心摇摇用户登录</header>
+		<div id="container">
+			<label id="label1" for="account">
+				<span>请输入账户</span>
+				<input type="text" name="account" id="account"  />
+			</label>
+			<label id="label2" for="pwd">
+				<span>请输入密码</span>
+				<input type="password" name="pwd" id="pwd"  />
+			</label>
+			<label id="label3" for="checkbox">
+				<span id="span1" class="check "></span>
+				<span>显示密码</span>
+				<a href="##">忘记密码?</a>
+			</label>
+			<label id="label4" for="checkbox">
+				<span id="span2" class="check "></span>
+				<span>记住密码自动登录</span>
+			</label>
+			<button id="btn1">登录</button>
+			<button id="btn2">注册</button>
+		</div>
+	</body>
+	<script>
+		(function (){
+//			页面重新加载判断是否存在已经设置自动登陆的账户和密码
+			if(localStorage.length!= 0){
+				for (var i=0;i<localStorage.length;i++) {
+					var key = localStorage.key(0)
+					$("#account").val(key)
+					var value= localStorage.getItem(key)
+					value = JSON.parse(value)
+					$("#pwd").val(value.pwd)
+				}
+//				var timerout = setTimeout(function(){
+//					alert("自动登录成功")
+////					window.open("index.html","_self")
+//				},1000)
+			}
+			/*显示密码块的点击事件*/
+			$("#span1").on("tap",function(){
+				if ($("#span1").hasClass("fa fa-check")) {
+					$("#span1").removeClass("fa fa-check")
+					$("#label2 input").prop("type","password")
+				}else
+				{
+					$(this).addClass("fa fa-check")
+					$("#label2 input").prop("type","text")
+				}
+			})
+			/*记住密码及自动登录块的点击事件*/
+			$("#span2").on("tap",function(){
+				if ($("#span2").hasClass("fa fa-check")) {
+					$("#span2").removeClass("fa fa-check")
+				}else
+				{
+//					增加记住密码的class
+					$(this).addClass("fa fa-check");
+				}
+			})
+			
+			/*登录按钮的点击事件*/
+			$("#btn1").on("tap",function(){
+				var name = $("#account").val();
+				var pwd = $("#pwd").val()
+				$.ajax({
+					type:"get",
+					url:"http://datainfo.duapp.com/shopdata/userinfo.php",
+					data:"?status=login&userID="+name+"&password="+pwd,
+					dataType:"html",
+					success:function(data){
+						console.log(data)
+						if(data !=0 && data !=2 ){
+							if ($("#span2").hasClass("fa fa-check")) {
+								var key = name;
+								var value = {
+									name:name,
+									pwd:pwd
+								}
+								alert("登录成功")
+								value = JSON.stringify(value)
+								localStorage.setItem(key,value)
+							}else
+							{
+								var key = name;
+								var value = {
+									name:name,
+									pwd:pwd
+								}
+								alert("登录成功");
+								localStorage.removeItem(key)
+								sessionStorage.setItem(key,value)
+							}
+							
+						}
+						window.open("index.html","_self")
+						
+					}
+				});
+			})
+			/*注册按钮的点击事件*/
+			$("#btn2").on("tap",function(){
+				window.open("register.html","_self")
+			})
+		})()
+	</script>
+</html>

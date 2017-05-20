@@ -1,0 +1,119 @@
+body, html, input {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+html body {
+  width: 100%;
+  height: 100%;
+}
+html body header {
+  width: 100%;
+  height: 48px;
+  background: #A90506;
+  line-height: 48px;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 24px;
+  position: fixed;
+  top: 0;
+}
+html body #container {
+  width: 100%;
+  height: 100%;
+  background: #F3EFF0;
+  padding-top: 48px;
+  box-sizing: border-box;
+}
+html body #container label {
+  display: -webkit-box;
+  width: 82%;
+  height: 60px;
+  padding: 0 4%;
+  margin-left: 5%;
+  margin-top: 7%;
+  border-radius: 8px;
+  background: #FFFFFF;
+}
+html body #container label span {
+  display: block;
+  width: 84px;
+  height: 100%;
+  font-size: 16px;
+  line-height: 60px;
+}
+html body #container label input {
+  display: block;
+  -webkit-box-flex: 1;
+  height: 97%;
+  border: none;
+  outline: 0;
+}
+html body #container #label2 {
+  margin-top: 6px;
+}
+html body #container #label3 {
+  width: 53%;
+  height: 50px;
+  background: none;
+  margin-top: 65;
+}
+html body #container #label3 .check {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #000000;
+  margin: 16px 6px 0 0;
+  line-height: 16px;
+  color: #90e022;
+}
+html body #container #label3 span {
+  line-height: 50px;
+}
+html body #container #label3 a {
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: none;
+  color: red;
+}
+html body #container #label4 {
+  height: 50px;
+  background: none;
+  margin-top: 0%;
+  margin-bottom: 12%;
+}
+html body #container #label4 .check {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 16px 6px 0 0;
+  border: 1px solid #000000;
+  line-height: 16px;
+  color: #90e022;
+}
+html body #container #label4 span {
+  width: 50%;
+  line-height: 50px;
+}
+html body #container #btn1, html body #container #btn2 {
+  display: block;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 4%;
+  height: 11%;
+  font-size: 22px;
+  border: none;
+  outline: 0;
+  border-radius: 6px;
+  background: #A90506;
+  color: #FFFFFF;
+}
+html body #container #btn2 {
+  background: #4f4f4f;
+}
+
+/*# sourceMappingURL=login.css.map */

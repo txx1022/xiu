@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="libs/swiper-3.3.1.min.css" />
+		<link rel="stylesheet" href="libs/animate.min.css" />
+		<link rel="stylesheet" href="css/home.css" />
+		<script src="libs/zepto.min.js"></script>
+		<script src="libs/swiper-3.3.1.jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="home" class="home">
+			秀出你的每一天
+		</div>
+		<div id="myswp" class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide slide1">
+					slide1
+				</div>
+				<div class="swiper-slide slide2">
+					slide2
+				</div>
+				<div class="swiper-slide slide3">
+					slide3
+				</div>
+				<div class="swiper-slide slide4">
+					slide4
+					<button id="btn">开始体验</button>
+				</div>
+			</div>
+			<div class="swiper-pagination">
+				
+			</div>
+		</div>
+	</body>
+	<script>
+		(function(){
+			var myswiper = new Swiper("#myswp",{
+				pagination:".swiper-pagination",
+			})
+			
+			var home={};
+			home.timer = setTimeout(function (){
+				$("#home").css({
+					"display":"none"
+				});
+			},2000)
+			$("#btn").on("tap",function(){
+				window.open("index.html","_self")
+			})
+			
+		})()
+	</script>
+</html>

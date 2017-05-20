@@ -1,0 +1,179 @@
+html, body, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+em, i {
+  font-style: normal;
+}
+
+ul li {
+  list-style: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+html body {
+  width: 100%;
+  height: 100%;
+}
+html body header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  background: #A90506;
+  text-align: center;
+  font-size: 22px;
+  color: #FFFFFF;
+  z-index: 2;
+}
+html body header span {
+  width: 18%;
+  height: 26px;
+  position: absolute;
+  right: 3%;
+  top: 10px;
+  color: #FFFFFF;
+  border: 1px solid #930e0c;
+  padding-top: 3px;
+  border-radius: 10px;
+}
+html body header .shop {
+  font-size: 24px;
+}
+html body #nav {
+  width: 100%;
+  height: 32px;
+  position: fixed;
+  top: 48px;
+  overflow-x: hidden;
+  z-index: 2;
+}
+html body #nav ul {
+  width: 520px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.5);
+}
+html body #nav ul li {
+  float: left;
+  width: 35px;
+  height: 100%;
+  line-height: 30px;
+  text-align: center;
+  font-size: 22px;
+  position: relative;
+}
+html body #nav ul li .angle {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border: 4px solid #7a7a7b;
+  bottom: 0px;
+  left: 14px;
+  border-top: solid transparent;
+  border-left: solid transparent;
+  border-right: solid transparent;
+}
+html body #container {
+  width: 100%;
+  height: 100%;
+  padding: 80px 0 55px 0;
+  box-sizing: border-box;
+  background: #F3f4f6;
+  overflow: auto;
+}
+html body #container #listctn {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+html body #container #listctn .wrap {
+  width: 100%;
+}
+html body #container #listctn .wrap .updata {
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+html body #container #listctn .wrap .warning {
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+html body #container #listctn .wrap ul {
+  width: 100%;
+}
+html body #container #listctn .wrap ul li {
+  display: inline-block;
+  width: 40%;
+  padding: 5% 5% 0 5%;
+}
+html body #container #listctn .wrap ul li a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+html body #container #listctn .wrap ul li a img {
+  width: 100%;
+  height: 160px;
+}
+html body #container #listctn .wrap ul li a p {
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+  line-height: 1.2;
+}
+html body #container #listctn .wrap ul li a span {
+  display: block;
+  line-height: 24px;
+  height: 24px;
+}
+html body #container #listctn .wrap ul li a span em {
+  display: inline-block;
+  margin-left: 5%;
+  font-size: 22px;
+  color: red;
+}
+html body #container #listctn .wrap ul li a span em:first-letter {
+  font-size: 16px;
+}
+html body #container #listctn .wrap ul li a span i {
+  display: inline-block;
+  float: right;
+  margin-right: 5%;
+  font-size: 14px;
+  color: red;
+}
+html body #container #listctn .downaction {
+  text-align: center;
+}
+html body footer {
+  width: 100%;
+  height: 55px;
+  position: fixed;
+  bottom: 0;
+  background: #484850;
+  display: -webkit-box;
+  color: #FFFFFF;
+  z-index: 1;
+}
+html body footer span {
+  border-top: 2px solid #484850;
+  height: 100%;
+  display: block;
+  text-align: center;
+  -webkit-box-flex: 1;
+  padding-top: 4px;
+}
+html body footer span .i1, html body footer span .i2, html body footer span .i3, html body footer span .i4 {
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=index.css.map */

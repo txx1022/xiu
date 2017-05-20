@@ -1,0 +1,155 @@
+html, body, p {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+html body {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+html body header {
+  width: 100%;
+  height: 48px;
+  background: #A90506;
+  text-align: center;
+  color: #FFFffF;
+  line-height: 48px;
+  font-size: 20px;
+  position: relative;
+}
+html body header .left {
+  height: 48px;
+  line-height: 48px;
+  font-size: 40px;
+  position: absolute;
+  left: 10px;
+}
+html body header .cart {
+  width: 18%;
+  height: 30px;
+  font-size: 30px;
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  border: 1px solid #930E0C;
+  border-radius: 10px;
+}
+html body #container {
+  width: 100%;
+  -webkit-box-flex: 1;
+}
+html body #container #ctn {
+  width: 100%;
+  height: 175px;
+}
+html body #container #ctn div {
+  width: 100%;
+  height: 100%;
+}
+html body #container #ctn div div {
+  width: 100%;
+  height: 100%;
+}
+html body #container #ctn div div img {
+  width: 100%;
+  height: 100%;
+}
+html body #container #ctn .mark {
+  width: 100px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-left: 35%;
+}
+html body #container #ctn .mark .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #FFFDEF;
+}
+html body #container #text {
+  width: 100%;
+  height: 40%;
+  background: #f3eff0;
+  padding: 6% 0;
+  position: relative;
+}
+html body #container #text .show {
+  position: absolute;
+  width: 50%;
+  height: 40px;
+  z-index: 2;
+  left: 25%;
+  top: 1%;
+  line-height: 40px;
+  text-align: center;
+  background: #E9967A;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  display: none;
+}
+html body #container #text p {
+  width: 90%;
+  margin-left: 5%;
+  line-height: 2;
+}
+html body #container #text .detailtext {
+  font-size: 18px;
+}
+html body #container #text .price {
+  font-size: 18px;
+}
+html body #container #text .price .now {
+  color: red;
+  font-weight: 600;
+}
+html body #container #text .price .pre {
+  text-decoration: line-through;
+  margin-left: 6%;
+}
+html body #container #text .buynumber {
+  font-size: 20px;
+}
+html body #container a {
+  display: block;
+  width: 88%;
+  font-size: 24px;
+  padding: 6%;
+  text-decoration: none;
+  color: #000000;
+}
+html body #container a i {
+  width: 8%;
+  border-radius: 50%;
+  background: red;
+  color: #FFFFFF;
+  margin-right: 4%;
+  text-align: center;
+}
+html body #container a span {
+  margin-left: 30%;
+}
+html body #container #iconbutton {
+  width: 100%;
+  height: 80px;
+  background: #a3a3a3;
+  text-align: center;
+  line-height: 80px;
+}
+html body #container #iconbutton button {
+  width: 70%;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+  outline: 0;
+  font-size: 23px;
+  color: #FFFFFF;
+  background: #930E0C;
+}
+
+/*# sourceMappingURL=goodsinfo.css.map */

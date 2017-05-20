@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="outCss/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="outCss/css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="libs/zepto.min.js"></script>
+		<script src="libs/iscroll-probe.js"></script>
+		<script src="js/comn.js"></script>
+		<!--<script>window.PointerEvent=void 0</script>-->
+	</head>
+	<body>
+		<header>
+			<span class="fa fa-shopping-cart shop"></span>
+			新品上市
+		</header>
+		<nav id="nav">
+			<ul id="navul"></ul>
+		</nav>
+		<div id="container">
+			<div id="listctn">
+				<div class="wrap">
+				<ul id="listul">
+					
+				</ul>
+				<div class="updata">
+					<span class="fa fa-spinner fa-spin"></span>
+				</div>
+				<div class="warning">没有更多商品了！！</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<span><i class="fa fa-home i1"></i>首页</span>
+			<span><i class="fa fa-list i2"></i>分类</span>
+			<span><i class="fa fa-shopping-cart i2"></i>购物车</span>
+			<span><i class="fa fa-user i4"></i>我的秀</span>
+		</footer>
+	</body>
+	<script>
+		(function(){
+			var claID=0;
+			var page=0;
+			
+			
+			/*nav栏的滑动事件,最早定义一个scroll*/
+			var myscroll1 = new IScroll("#nav",{
+				scrollX :true,
+				scrollY:false
+			})
+			var myscroll2 = new IScroll("#listctn",{
+				scrollX :false,
+				scrollY:true,
+				mouseWheel:true,
+				click:true,
+				probeType:3
+			})
+			
+//			加载过程中取到分类数量和图标
+			$.ajax({
+				type:"get",
+				url:"http://datainfo.duapp.com/shopdata/getclass.php",
+				async:true,
+				success:function(msg){
+//					console.log(msg)
+					var classlist = JSON.parse(msg);
+//					console.log(classlist[0])
+					for (var i=0;i<classlist.length;i++) {
+						var $li = $("<li data-classID="+classlist[i].classID+" data-className="+classlist[i].className+" class='iconfont'>"+classlist[i].icon+"<span class='angle'></span></li>")
+						$("#navul").append($li);
+					}
+					/*动态给nav下的ul的宽度*/
+					$("#navul").css({
+						width:35*classlist.length
+					});
+					myscroll1.refresh()
+				}
+			});
+		/*nav栏的li的点击事件需要使用事件委托; jquery和zepot提供的data()的方法可以直接取到自定义属性值*/
+			$("body").on("tap","#navul li",function(){
+				$(this).css("color","#FFFFFF").siblings().css("color","#333333").end().children(".angle").css({
+					    "border": "4px solid #ffffff",
+					    "border-top": "solid transparent",
+    					"border-left": "solid transparent",
+    					"border-right": "solid transparent"
+				}).end().siblings().children().css({"border": "4px solid #7a7a7b"});
+				$(".warning").hide()
+				claID = $(this).data("classid")
+				$("#listul").children().remove()
+					page=0
+					getItem(claID)
+			})
+		
+		
+		
+		
+		
+//		不存classID的时候默认加载热销商品;	
+		getItem(claID)
+		/*加载过程中自动加载第一组热销商品*/
+		 function getItem(classID){
+			$.ajax({
+				type:"get",
+				url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+				data:{
+					classID:classID,
+					pageCode:page,
+					linenumber:6
+				},
+				async:true,
+				dataType:"jsonp",
+				success:function(data){
+					if (data == 0) {
+						$(".warning").show()
+					}
+					console.log(data)
+					var list = data;
+					for (var i= 0; i<list.length;i++) {
+						var img = list[i]["3"]
+						var $li = $("<li data-classID="+list[i].classID+" data-goodsid="+list[i].goodsID+"><a href='goodsinfo.html?goodsID="+list[i].goodsID+"'><img src='"+img+"'><p>"+list[i].goodsName+"</p><span><em>￥"+list[i].price+"</em><i>"+list[i].discount+"折</i></span></a> </li>")
+						$("#listul").append($li)
+					}
+					myscroll2.refresh()
+					page++;
+					direction=0
+					var timer = setTimeout(function(){
+						$(".updata").hide()
+						myscroll2.refresh()
+					},3000,function(){
+						clearTimeout(timer)
+					})
+					
+					
+				}
+			})
+		}
+	
+		 var direction;
+		 myscroll2.on("scroll",function (){
+//		 	console.log(this.y+"--/"+this.maxScrollY+"---/"+this.directionY);
+		 	if (this.directionY == 1 && this.y+30 < this.maxScrollY) {
+		 		console.log("向下加载")
+				direction = 1;
+				$(".warning").hide();
+				$(".updata").show();
+				myscroll2.refresh()
+		 	}
+		 	if (this.directionY == -1 && this.y>20) {
+		 		console.log("向上刷新")
+				direction = -1
+				myscroll2.refresh()
+		 	}
+		 })
+	
+		
+		 myscroll2.on("scrollEnd",function(){
+		 	console.log(this.y+"--/"+this.maxScrollY+"---/"+this.directionY+"/"/*+bottom*/);
+		 	
+		 	if (direction == 1 ) {
+		 		console.log("向下加载")
+		 		getItem(claID)
+		 	}
+		 	if (direction == -1) {
+		 		console.log("向上刷新")
+		 	}
+		 })
+		 
+		 
+		 
+		 
+//		 顶部购物车的点击事件
+		$("header .shop").on("tap",function(){
+			gotocart()
+		})
+		 
+		 
+		 
+		 
+		 //index页面底部的点击事件
+		 	 $("footer span").on("tap",function(){
+		 		var i = $(this).index()
+		 		if (i == 1 ) {
+		 			$("#nav ul li").eq(0).children(".angle").css({
+		 				"border": "4px solid #ffffff",
+					    "border-top": "solid transparent",
+    					"border-left": "solid transparent",
+    					"border-right": "solid transparent"
+		 			})
+		 			page = 0;
+		 			claID = 1;
+		 			$("#listul").children().remove()
+		 			getItem(claID)
+		 		}
+		 		
+		 		
+		 		if (i == 2 ) {
+		 			gotocart()
+		 		}
+		 		if (i == 3 ) {
+		 			if(userID) {
+		 				location.href = "myshow.html"
+		 			}else
+		 			{
+		 				alert("请登录您的账号")
+		 			}
+		 		}
+		 	})
+	
+		
+		function gotocart(){
+			if (userID) {
+				location.href = "shopcart.html"
+			}
+			else
+			{
+				alert("请登录您的账号")
+				window.open("login.html","_self")
+			}
+		}
+		
+		
+		 
+		 
+		 
+		 
+		 
+		})()
+	</script>
+</html>

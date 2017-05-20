@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="outCss/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="css/goodsinfo.css"/>
+		<link rel="stylesheet" type="text/css" href="libs/swiper-3.3.1.min.css"/>
+		<script src="libs/zepto.min.js"></script>
+		<script src="libs/swiper-3.3.1.jquery.min.js"></script>
+		<script src="js/comn.js"></script>
+	</head>
+	<body>
+		<header> <i class="fa fa-angle-left left"></i>商品资料<span class="fa fa-shopping-cart cart"></span></header>
+		<div id="container">
+			<div id="ctn" class="swiper-container">
+				<div class="swiper-wrapper">
+					
+				</div>
+				<div  class="swiper-pagination mark"></div>
+			</div>
+			<div id="text">
+				<div class="show">该商品已加入购物车</div>
+				<p  class="detailtext"></p>
+				<p class="price">
+					<span class="now"></span>
+					<span class="pre"></span>
+				</p>
+				<p class="buynumber">购买人数：<span class="spannumber"></span></p>
+			</div>
+			<a href=""><i class="fa fa-exclamation"></i>查看商品详情<span class="fa fa-angle-right"></span></a>
+			<div id="iconbutton">
+				<button>添加到购物车</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		(function(){
+//			取到url上的商品id;
+			var goodsid;
+			function getUrlstring(){
+				 goodsid = location.search.substr(1).split("=")[1]
+//				console.log(goodsid)
+			}
+			getUrlstring()
+		
+				/*将该商品的id存入button按钮中*/
+			$("#iconbutton").attr("data-goodsid",goodsid);
+			
+			
+			/*加载页面信息*/
+			$.ajax({
+				type:"get",
+				data:{goodsID:goodsid},
+				url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+				async:true,
+				dataType:"jsonp",
+				success:function (data){
+					console.log(data)
+					var goodsname = (data[0]["goodsName"]);
+					var price = (data[0]["price"]);
+					var discount = data[0]["discount"]
+					var preprice = price;
+					if (discount != 0) {
+						preprice =10*parseInt(price/discount)
+					}
+					
+					var buynumber = data[0]["buynumber"]
+					var imgliststr = data[0]["goodsBenUrl"];
+					var imglist = JSON.parse(imgliststr);
+					for (var i = 0; i<imglist.length;i++) {
+						var $div = $("<div class='swiper-slide'><img src='"+imglist[i]+"'></div>")
+						$(".swiper-wrapper").append($div)
+					}
+					var mySwiper = new Swiper(".swiper-container",{
+							direction:"horizontal",
+							autoplay :"2000",
+							pagination :".swiper-pagination",
+							loop:true,
+							effect:"coverflow",
+							slidesPerView: 3,
+							centeredSlides: true
+					})
+					$("#text .detailtext").text(goodsname);
+					$("#text .price .now").text("￥"+price)
+					$("#text .price .pre").text(preprice)
+					$("#text .buynumber .spannumber").text(buynumber)
+				}
+			});
+			
+			/*点击返回首页*/
+			$("header i").on("tap",function (){
+				window.open("index.html","_self")
+			});
+			/*点击查看购物车操作*/
+			$("header span").on("tap",function(){
+				window.open("shopcart.html","_self")
+			})
+			
+			
+			
+			
+			/*加入购物车按钮事件*/
+//			此处由于userID的取值在事件里面所以能够取到
+			$("#iconbutton").on("tap",function(){
+				var goodsid = $(this).data("goodsid")
+				if (userID) {
+					updatashopcart(userID,goodsid,1,show)
+				}else
+				{
+					alert("请先登录");
+					location.href="login.html"
+				}
+			})
+			
+			function show(){
+				$("#text .show").fadeIn(100)
+			 var timer = setTimeout(function(){
+					$("#text .show").fadeOut(1000)
+				},2000,function(){
+					clearTimeout(timer)
+				})
+			
+			}
+			
+			
+		})()
+	</script>
+</html>

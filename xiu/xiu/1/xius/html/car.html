@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<script>window.PointerEvent=void 0</script>
+<title>car</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../common/swiper/swiper-3.3.1.min.css"/>
+	 <link rel="stylesheet" type="text/css" href="../common/icons/iconfont.css"/>
+	<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/swiper/swiper-3.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/zepto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/touch.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	header{height: 1.74rem;   width: 6.4rem;　background: pink; }
+	#header{ height: 0.86rem; width: 100%; background: #ad1b1b;   text-align: center;    
+	display: flex; align-items: center; justify-content: center;  font-size: 0.35rem;  color: #fff;}
+	header img{  position: absolute; height: 0.52rem; width: 1.04rem; right: 0.2rem;}
+	header span{ margin-left: -0.2rem; }
+	#num{ height:0.88rem; width: 6.15rem; background: #757575; padding-left: 0.25rem; font-size: 0.3rem;
+	        color: #fff; line-height: 0.88rem;}
+	.number{ margin-left: 0.12rem; margin-right: 0.3rem; }
+	.price{ margin-left: 0.15rem; color: red; }
+	body,html{ height: 100%; width: 100%;}
+	body{  display: flex;  flex-direction: column; }
+	section{ flex: 1;  overflow: hidden; }
+	.list{ padding: 0.3rem; height: 1.75rem; border-bottom: 1px solid #000;}
+	.li1,.li2{ float: left; }
+	.li3{ float: right; }
+	.li1 img{ height: 1.75rem; width: 1.73rem; margin-right: 0.25rem; float: left; }
+	.li2{ width: 3.2rem; height: 1.75rem; }
+	.li2 img{ height: 0.4rem; width: 0.57rem; float: left;}
+	.li3{ height: 1.75rem; }
+	.li3 img{ height: 0.32rem; width: 0.27rem; }
+	.li2 p{ line-height: 0.38rem; font-size: 0.22rem; color: #323232; height: 0.38rem; }
+	.li2 p:first-child{ width: 3.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.shuliang{　height: 0.4rem; width: 0.72rem; text-align: center; line-height: 0.4rem;
+	display: inline-block;  float: left;
+	 font-size: 0.25rem;　margin-left: 0.15rem; margin-right: 0.15rem; border: 1px solid #ccc;}
+    .fl{ float: left; }
+
+footer{ height: 0.58rem;  background: #484850; display: flex; justify-content: space-between; 
+	        padding: 0.1rem 0.3rem 0.5rem 0.3rem;  center;        width: 91%; }
+footer dd{ font-size: 0.24rem; color: #fff; margin-top: 0.1rem; }
+footer dl{ text-align: center; }
+footer dt{ color: #fff; }
+.dt1{ font-size: 0.48rem !important; }
+.dt2{ font-size: 0.37rem !important; }
+.dt3{ font-size: 0.42rem !important; }
+.dt4{ font-size: 0.42rem !important; }
+.dt5{ font-size: 0.4rem !important; }
+</style>
+
+</head>
+<body>
+  <header>
+  	<div id="header">
+    <img class="left" src="../img/images/left.png"/>
+	<span>购物车</span>
+	<img src="../img/images/car.png"/>
+	</div>
+	<div id="num">
+  	  <p>商品数量：<span class="number"></span><span>应付总额(不含运费)：</span><span class="price"></span></p>
+  </div>
+  </header>
+  
+  <section> 
+  	  <div class="list1"></div>
+  </section>
+  <footer>
+		<dl id="dl1">
+			<dt><i class="iconfont icon-shouye dt1"></i></dt>
+			<dd>首页</dd>
+		</dl>
+		<dl id="dl2">
+			<dt><i class="iconfont icon-sousuo dt2"></i></dt>
+			<dd>分类</dd>
+		</dl>
+		<dl id="dl3">
+			<dt><i class="iconfont icon-gouwuche dt3"></i></dt>
+			<dd>购物车</dd>
+		</dl>
+		<dl id="dl4">
+			<dt><i class="iconfont icon-wode dt4"></i></dt>
+			<dd>我的秀</dd>
+		</dl>
+		<dl id="dl5">
+			<dt><i class="iconfont icon-shoucang dt5"></i></dt>
+			<dd>更多</dd>
+			
+		</dl>
+	</footer>
+</body>
+<script type="text/javascript">
+window.onload=function(){	
+		var id=location.search.substr(1).split('=')[1]
+		var shop=new IScroll('section',{
+			mouseWheel:true
+		})
+		var name=JSON.parse(localStorage.getItem('username'))
+		
+		
+		// 更新：
+ function updata(num,id){
+ 	//console.log(id)
+ 		$.ajax({
+ 			type:"get",
+ 			url:"http://datainfo.duapp.com/shopdata/updatecar.php",
+ 			async:true,
+ 			data:{userID:name.name,goodsID:id,number:num},
+ 			dataType:'json',
+ 			success:function(item){  
+ 				//console.log(item)
+ 			}
+ 		});
+ 		}
+		
+			
+  //function getcar(){
+		  $.ajax({
+				type:"get",
+				url:"http://datainfo.duapp.com/shopdata/getCar.php",
+				async:true,
+				data:{userID:name.name},
+				dataType:'jsonp',
+				success:function(data){
+					console.log(data)
+				var ul="";
+				var allnum = 0;
+				var allprice = 0;
+				$.each(data, function(i) { 
+					//循环遍历  执行一下refresh就行了
+//				console.log(data[i].number)
+				ul+='<div class="list" id="'+data[i].goodsID+'"><div class="li1"><img src="'+data[i].goodsListImg+'"/></div>'+
+				'<div class="li2"><p>'+data[i].goodsName+'</p><p>单价:<span class="sanjia">'+data[i].price+'</span></p><p><span class="fl">数量:</span><img class="reduce" src="../img/images/resuce.png"/><span class="shuliang">'+data[i].number+'</span><img class="add" src="../img/images/add.png"/></p></div>'+
+				'<div class="li3"><img class="del" id="'+data[i].goodsID+'" src="../img/images/delete.png"/></div></div>'
+			 	allnum += parseInt(data[i].number)
+			   	allprice += data[i].number * data[i].price
+ 			    });
+			     $(".list1").append(ul)
+			     $('.number').html(allnum)
+			     $('.price').html(allprice)
+					// 点击进行数量的增减	
+					$('.reduce').on('tap',function(){
+						console.log('1')
+						var  nums=$(this).next().html()
+						var goodsid = $(this).parents('.list').attr('id')	
+						 nums--;
+						 if(nums<=1){
+							nums=1
+						}
+						$(this).next().html(nums)
+						 $('.number').html(allnum)
+			     		 $('.price').html( allprice)
+						 updata(nums,goodsid)
+						
+					  });
+					  $('.add').on('tap',function(){
+						console.log('2')
+					  	
+						var nums = $(this).prev().html()
+						var goodsid = $(this).parents('.list').attr('id')		
+						console.log('woshi id'+goodsid)
+						console.log(nums)
+						 nums++; 
+						 console.log(nums)
+						$(this).prev().html(nums)
+						
+						 $('.number').html(allnum)
+			     		 $('.price').html(allprice) 
+			     		 updata(nums,goodsid)
+			     		 shop.refresh()
+					  })					  
+					    
+					 //点击删除：
+                      $('.del').on('tap',function(){
+                      	var ids=$(this).attr('id')
+                      	 updata(0,ids)    
+                      	 $('.number').html(allnum)
+			     		 $('.price').html(allprice) 
+                      	 shop.refresh()
+                      })
+                       
+						}
+			          
+					});
+					
+        // 点击跳转：
+        $('#dl1').on('tap',function(){
+        	window.location.href='money.html'
+        })
+        $('#dl2').on('tap',function(){
+        	window.location.href='index.html'
+        })
+		$('#dl3').on('tap',function(){
+        	window.location.href='car.html'
+        })
+	 
+		
+		
+		 
+ 
+		
+	}
+</script>
+</html>

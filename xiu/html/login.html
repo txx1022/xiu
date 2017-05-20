@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>login</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/zepto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/touch.min.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		body,html{ width: 100%; overflow: hidden; background: #f3eff0 ;}
+		header{ height: 0.88rem; background: #a90506; text-align: center; font-size: 0.3rem; padding-left: 0.27rem;
+		           color: #fff; line-height: 0.88rem;   width: 100%; } 
+	    
+	   
+	   section{ padding: 0.3rem; text-align: center;}
+	   section div{ height:0.85rem; width: 5.78rem; line-height: 0.85rem; margin-bottom: 0.05rem; 
+	   background: #fff; text-align: left; padding-left: 0.2rem; font-size: 0.25rem;}
+	   .span1{ color: #5a5c5b; margin-right: 0.4rem; display: inline-block;}
+	   .span2{ color: #ff1051; display: inline-block;}
+	   #no input,#yes input{ height: 0.37rem; width: 0.37rem; border: 1px solid #5b5b5b; margin-right: 0.1rem;}
+	   #no,#yes{ background: #f3eff0; }
+	   #no{ margin-top: 0.35rem; }
+	   section span{ color: #505050; }
+	   #txt,#pass{ color: #9b9b9b; height:0.85rem; width: 5.78rem; }
+	   section button{ height:0.85rem; width: 5.80rem;  color: #fff; line-height: 0.84rem; 
+	         text-align: center; font-size: 0.36rem; }
+	    #regist{  background: url(../img/images/login.png) repeat-x;  margin-top: 0.1rem;}
+	    #login{ background: url(../img/images/regist1.png) repeat-x; margin-top: 0.6rem;}
+	</style>
+</head>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<body>
+	<header> 
+		<span>开心摇摇用户登录</span>
+	</header>
+	<section>
+		<div><input type="text" name="" id="txt" placeholder="请输入账户" value=""/></div>
+		<div><input type="password" name="" id="pass" placeholder="请输入密码" value=""/></div>
+		<div id="no"><input type="checkbox" name="" id="show" value="" /><span class="span1">显示密码</span><span class="span2">忘记密码？</span></div>
+		<div id="yes"><input type="checkbox" name="" id="remeber" value="" /><span>记住密码自动登录</span></div>
+	    <button id="login">登录</button>
+		<button id="regist">注册</button>
+	</section>
+</body>
+<script type="text/javascript">
+$('#login').on("tap",function(){	
+	$.ajax({
+		type:"get",
+		url:"http://datainfo.duapp.com/shopdata/userinfo.php", 
+		data:{status:'login',userID:$('#txt').val(),password:$('#pass').val()},
+			dataType:'json',
+			success:function(data){
+				if(data==0){
+					alert('用户名不存在')
+				}
+				if(data==2){
+					alert('用户密码不符合')
+				}
+				if(data!==0&&data!==2&&$('#txt').val()!==""&&$('#pass').val()!==""){
+					confirm('登录成功')
+					window.location.href='index.html'
+				}
+			}
+			
+	});	
+})
+
+$('#regist').on('tap',function(){
+	window.location.href='regist.html'
+})
+//显示密码
+$('#show').on('tap',function(){
+	if($('#show')[0]['checked']){
+		$('#pass')[0].type='text'
+	}else{
+		$('#pass')[0].type='password'
+	}
+})
+
+// 点击记住密码:存到localstorage
+$('#remeber').on('tap',function(){
+	if($('#remeber')[0]['checked']){
+		var obj={
+			name:$('#txt').val(),
+			pass:$('#pass').val()
+		}
+		var objs=JSON.stringify(obj)  //localhoststorage 里面只能存字符串
+		localStorage.setItem('username',objs)
+	}
+})
+</script>
+</html>

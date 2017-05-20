@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="outCss/css/font-awesome.css"/>
+		<style>
+			html,body,ul,li,p {
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				list-style: none;
+			}
+			
+			
+			html {
+				width: 100%;
+				height: 100%;
+			}
+			body {
+				width: 100%;
+				height: 100%;
+			}
+			header{
+				width: 100%;
+				height: 48px;
+				position: absolute;
+				top: 0;
+				background: #A90506;
+			}
+			
+			#contain {
+				width: 100%;
+				height: 100%;
+				padding: 48px 0 48px 0;
+				box-sizing: border-box;
+			}
+			.ctn {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			.wrap {
+				width: 100%;
+				padding: 10px 0;
+				/*overflow: hidden;*/
+				/*height: 1200px;*/
+			}
+			ul {
+				width: 100%;
+				/*overflow: hidden;*/
+				/*height: 1200px;*/
+			}
+			li {
+				display: inline-block;
+				width: 45%;
+				height: 230px;
+				vertical-align: middle;
+				padding: 0 2.5%;
+			}
+			li img {
+				width: 100%;
+				height: 160px;
+			}
+			li .text {
+				width: 100%;
+				height: 19px;
+				overflow:hidden;
+				text-align: center;
+				font-size: 14px;
+				line-height: 19px;
+				font-size: 15px
+			}
+			li .price {
+				width: 100%;
+				height: 38px;
+				overflow:hidden;
+				text-align: center;
+				font-size: 14px;
+				line-height: 40px;
+			}
+			li .price .nowpri,li .price .prepri{
+				display: inline-block;
+			}
+			li .price .nowpri {
+				float: left;
+				color: red;
+				font-size: 16px;
+				font-weight: 600;
+			}
+			li .price .nowpri:first-letter {
+				margin-right: 5px;
+				
+			}
+			
+			li .price .prepri {
+				float: right;
+				text-decoration: line-through;
+				margin-right: 10%;
+			}
+			
+			
+			.updata {
+				width: 100%;
+				text-align: center;
+				display: none;
+			}
+			.warning {
+				width: 100%;
+				text-align: center;
+				display: none;
+			}
+			footer {
+				background: rgba(195,195,195,0.3);
+				width: 100%;
+				height: 48px;
+				position: absolute;
+				bottom: 0;
+				text-align: center;
+				font-size: 30px;
+				line-height: 48px;
+				color: #000000;
+			}
+			
+		</style>
+		<script src="libs/zepto.min.js"></script>
+		<script src="libs/iscroll-probe.js"></script>
+	</head>
+	<body>
+		<header></header>
+		<div id="contain">
+			<div class="ctn">
+				<div  class="wrap">
+				<ul>
+					
+				</ul>
+				<div class="updata">
+					<span class="fa fa-spinner fa-spin"></span>
+				</div>
+				<div class="warning">没有更多商品了！！</div>
+				</div>
+			</div>
+		</div>
+		<footer>footer</footer>
+	</body>
+	<script>
+		(function(){
+			var myscroll = new IScroll(".ctn",{
+				scrollX :false,
+				scrollY:true,
+				click:true,
+				probeType:3
+			})
+		var page = 0;
+		updata();
+		function updata(){
+			$.ajax({
+				type:"get",
+				url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+				async:true,
+				data:{
+					pageCode:page,
+					linenumber:6,
+					classID:0
+				},
+				dataType:"jsonp",
+				success:function(data){
+					var goodslist =data;
+					if (goodslist == 0) {
+						$(".warning").show()
+					}
+					console.log(goodslist)
+					$.each(goodslist, function(i,obj) {
+						var prepri;
+						if (obj.discount != 0) {
+							prepri =parseInt(100*10*obj.price/obj.discount)/100
+						}else{
+							prepri = obj.price
+						}
+						
+						var $li = $("<li data-goodid="+obj.goodsID+">"+
+								 "<img src="+obj.goodsListImg+">"+
+								 "<p class='text'>"+obj.goodsName+"</p>"+
+								 "<p class='price'><span class='nowpri'>￥"+obj.price+"</span><span class='prepri'>"+prepri+"</span></p>"+
+								 "</li>")
+						$(".wrap ul").append($li)
+					});
+					page++;
+//					执行完成后方向为空,
+						dir="";
+						myscroll.refresh()
+//					设定3秒后刷新图标消失
+					var timer = setTimeout(function(){
+						$(".updata").hide();
+						myscroll.refresh()
+					},1000,function(){
+						clearTimeout(timer)
+					})
+				}
+			});
+		}
+//			设定变量存放方向
+			var dir;
+			myscroll.on("scroll",function(){
+				console.log(this.y,this.maxScrollY,this.directionY)
+				if (this.directionY == 1 && this.y+20 < this.maxScrollY) {
+					console.log("1111111")
+					dir = "downupdata";
+					$(".warning").hide()
+					$(".updata").show();
+					myscroll.refresh()
+				}
+			})
+			
+			myscroll.on("scrollEnd",function(){
+				if (dir == "downupdata") {
+					updata();
+				}
+			})
+			
+		})()
+	</script>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="outCss/css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="css/shopcart.css"/>
+		<script src="libs/zepto.min.js"></script>
+		<script src="js/comn.js"></script>
+		
+	</head>
+	<body>
+		<header>
+			购物车<span>结算</span>
+		</header>
+		<nav>
+			商品数量:<span class="allnum">0</span>应付总额(不含运费):<span class="allpri">0</span>
+		</nav>
+		<div id="contain">
+			<section>
+				<ul>
+					
+				</ul>
+			</section>
+		</div>
+		<footer>
+			<span><i class="fa fa-home i1"></i>首页</span>
+			<span><i class="fa fa-list i2"></i>分类</span>
+			<span><i class="fa fa-shopping-cart i2"></i>购物车</span>
+			<span><i class="fa fa-user i4"></i>我的秀</span>
+		</footer>
+	</body>
+		<script>
+			(function(){
+				/*显示购物车信息*/
+			//查看购物车
+			
+			var allnum=0,allpri=0;
+			
+				$.ajax({
+					type:"get",
+					url:"http://datainfo.duapp.com/shopdata/getCar.php",
+					data:{
+						userID:userID
+					},
+					async:true,
+					dataType:"jsonp",
+					success:function(data){
+						if (data == 0) {
+						alert("数据更新失败")
+					}
+						var shopitem = data;
+						console.log(shopitem)
+						for (var i = 0;i <shopitem.length;i++) {
+						var $li = $("<li data-goodid='"+shopitem[i].goodsID+"'><div class='img'><img src='"+shopitem[i].goodsListImg+"'/></div>"+
+								"<div class='info'>"+
+								"<p>"+shopitem[i].goodsName+"</p>"+
+								"<p>单价:<span class='aprice'>￥"+shopitem[i].price+"</span></p>"+
+								"<p>数量:<span class='cut'>-</span><input type='text' value='"+shopitem[i].number+"'><span class='add'>+</span></p>"+
+								"</div><div class='fa fa-trash-o del'><div></li>")
+							$("ul").append($li)
+							allnum += parseInt(shopitem[i].number)  
+							allpri += shopitem[i].number*shopitem[i].price
+						}
+						$("nav .allnum").text(allnum);
+						$("nav .allpri").text(allpri);
+					}
+				});
+			
+			
+
+				
+//			购物车的数量和价值操作
+				/*点击减操作*/
+			$("body").on("tap","p .cut",function(){
+				var goodid = $(this).parents("li").data("goodid")
+				var num = $(this).next().val()
+				num--;
+				var that = $(this)
+				if (num==0) {
+				$(this).next().val(num)
+				var timer = setTimeout(function(){
+					that.parents("li").remove()
+				},1000)
+				}
+				$(this).next().val(num)
+				
+				updatashopcart(userID,goodid,num);
+				updataallnum()
+			})
+			
+			/*点击加操作*/
+			$("body").on("tap","p .add",function(){
+				var goodid = $(this).parents("li").data("goodid")
+				var num = $(this).prev().val()
+				num++;
+				var that = $(this)
+				$(this).prev().val(num)
+				updatashopcart(userID,goodid,num)
+				updataallnum()
+			})	
+			
+			/*点击删除操作*/
+			$("body").on("tap","li .del",function(){
+				var goodid = $(this).parent("li").data("goodid")
+				updatashopcart(userID,goodid,0)
+				$(this).parent().remove()
+				updataallnum()
+			})	
+			
+			
+				
+//			更新总的数量和总价值
+			function updataallnum(){
+				var allnum = 0;
+				var allpri = 0;
+				var lilist = $("ul li");
+				$.each(lilist, function(i,obj) {
+					var li = $(obj);
+					var num = li.find("input").val();
+					/*下面的乘以100再除以100,可以使得数据为2位小数的float型*/
+					var aprice = 100*(li.find(".aprice").text().substr(1))/100 
+					allnum += parseInt(num);
+					allpri += (num*aprice)
+				});
+				$("nav .allnum").text(allnum);
+				$("nav .allpri").text(allpri);
+			}
+			
+				
+				/*footer处的点击事件*/
+				$("footer span").on("tap",function(){
+					var i = $(this).index()
+					if (i == 0 ) {
+						window.open("index.html","_self")
+					}
+					if (i == 1 ) {
+						window.open("index.html","_self")
+					}
+					if (i == 3 ) {
+						window.open("myshow.html","_self")
+					}
+				})
+			})()
+			
+		</script>
+</html>

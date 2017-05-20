@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>register页面</title>
+		<link rel="stylesheet" href="outCss/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="css/register.css"/>
+		<script src="libs/zepto.min.js"></script>
+	</head>
+	<body>
+		<header id="rheader"><span  class="fa fa-arrow-left  span1"></span>用户注册<span class="loginicon">登录</span></header>
+		<div id="container">
+			<label id="label1" for="account">
+				<span>账户名称：</span><input id="account" type="text" placeholder="请输入账户"/>
+			</label>
+			<label id="label2" for="pwd">
+				<span>登录密码：</span><input id="pwd" type="password" placeholder="请输入密码"/>
+			</label>
+			<label id="label3" for="rpwd">
+				<span>确认密码：</span><input id="rpwd" type="password" placeholder="请输入密码"/>
+			</label>
+			<button id="rbtn">确认注册</button>
+		</div>
+	</body>
+	<script>
+		(function(){
+			/*用户注册页面的注册按钮的点击事件以及正则验证*/
+			$("#rbtn").on("tap",function(){
+				var name = $("#account").val();
+				var pwd = $("#pwd").val();
+				var rpwd = $("#rpwd").val();
+				var patterntestname = /[a-zA-Z0-9]{6}/.test(name);
+				var pwdtest = (pwd == rpwd)
+				if (patterntestname&&pwdtest&&pwd) {
+					$.ajax({
+						type:"get",
+						url:"http://datainfo.duapp.com/shopdata/userinfo.php",
+						"data":"?status=register&userID="+name+"&password="+pwd,
+						"datatype":"html",
+						"success":function(data){
+							var mydata = data;
+							if (data == 1) {
+								alert("注册成功")
+								window.open("login.html")
+							}
+						}
+					})
+				}else
+				{
+					alert("账户长度不得低于6位，且密码不能为空")
+				}
+				
+			})
+			/*注册页面顶部回到上一页按钮的点击事件*/
+			$("#rheader .span1").on("tap",function(){
+				window.history.go(-1)
+			})
+			$("#rheader .loginicon").on("tap",function(){
+				window.open("login.html","_self")
+			})
+		})()
+	</script>
+</html>

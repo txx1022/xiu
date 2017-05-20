@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<script>window.PointerEvent=void 0</script>
+<title>index</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../common/icons/iconfont.css"/>
+    <script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../common/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/zepto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/touch.min.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		html,body{ height: 100%; width: 100%; }
+		body{display: flex; flex-direction: column;}
+		header{height: 0.86rem; font-size: 0.35rem;  color: #fff; line-height: 0.86rem; width: 100%;　
+		         text-align: center;  background: #ad1b1b;  
+		         display: flex; align-items: center; justify-content: center;}
+		header img{  position: absolute; height: 0.52rem; width: 1.04rem; right: 0.2rem;}
+		header span{ margin-left: -0.2rem; }
+		
+		.father{ display: flex; flex-direction: row;  }
+		.list{ height: 0.57rem; background: #9a9fa5; width: 100%; padding-left: 0.43rem; line-height: 0.57rem;
+		       overflow: hidden;  }
+		.list ul{ width: 140%; height: 0.57rem; }
+		.list li .iconfont{ float: left; font-size: 0.35rem !important; margin-right: 0.3rem; }
+        .list ul li{ float: left; }
+        
+        .ul img{ position: absolute; bottom: 0;  margin-left: -0.65rem;}
+        .section{overflow: hidden; padding: 0.35rem; padding-top: 0; flex: 1;}
+        .section .p1{ text-align: center; font-size: 0.14rem;  width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 0.1rem;}
+        .section .p2{ width: 100%; }
+        .section .price1{float: left; color:red; }
+        .price{ float: right;  text-decoration: line-through; color: #ccc;}
+	 	#proList{overflow: hidden;}
+		#proList li{ height: 3.3rem; width: 2.47rem;   float: left; margin-top: 0.3rem;}
+		#proList li:nth-child(odd){margin-right: 0.7rem; }
+		#proList li img{ height: 2.44rem; width: 2.46rem; }
+		footer{ height: 0.58rem;  background: #484850; display: flex; justify-content: space-between; 
+		        padding: 0.1rem 0.3rem 0.5rem 0.3rem;  center;      position: absolute; bottom: 0;  width: 91%; }
+		footer dd{ font-size: 0.24rem; color: #fff; margin-top: 0.1rem; }
+		footer dl{ text-align: center; }
+		footer dt{ color: #fff; }
+		.dt1{ font-size: 0.48rem !important; }
+		.dt2{ font-size: 0.37rem !important; }
+		.dt3{ font-size: 0.42rem !important; }
+		.dt4{ font-size: 0.42rem !important; }
+		.dt5{ font-size: 0.4rem !important; }
+	</style>
+	
+	
+
+</head>
+<body>
+	<header>
+		<span>新品上市</span>
+		<img class="shop" src="../img/images/index1.png"/>
+	</header>
+<div class="father">
+	<div class="list">
+		  <ul class="ul">
+				<li id="1"><i class="iconfont">&#xe670;</i><img src="../img/images/top.png"/></li>
+				<li id="2"><i class="iconfont">&#xe666;</i><img src="../img/images/top.png"/></li>
+				<li id="3"><i class="iconfont">&#xe674;</i><img src="../img/images/top.png"/></li>
+				<li id="4"><i class="iconfont">&#xe67d;</i><img src="../img/images/top.png"/></li>
+				<li id="5"><i class="iconfont">&#xe66e;</i><img src="../img/images/top.png"/></li>
+				<li id="6"><i class="iconfont">&#xe66d;</i><img src="../img/images/top.png"/></li>
+				<li id="7"><i class="iconfont">&#xe677;</i><img src="../img/images/top.png"/></li>
+				<li id="8"><i class="iconfont">&#xe672;</i><img src="../img/images/top.png"/></li>
+				<li id="9"><i class="iconfont">&#xe664;</i><img src="../img/images/top.png"/></li>
+				<li id="10"><i class="iconfont">&#xe675;</i><img src="../img/images/top.png"/></li>
+				<li id="11"><i class="iconfont">&#xe673;</i><img src="../img/images/top.png"/></li>
+				<li id="12"><i class="iconfont">&#xe665;</i><img src="../img/images/top.png"/></li>
+				<li id="13"><i class="iconfont">&#xe679;</i><img src="../img/images/top.png"/></li>
+			</ul>
+	   </div>
+</div>
+<div class="section">
+
+	<ul id="proList"> 
+	</ul>
+
+</div>
+	<footer>
+		<dl id="dl1">
+			<dt><i class="iconfont icon-shouye dt1"></i></dt>
+			<dd>首页</dd>
+		</dl>
+		<dl id="dl2">
+			<dt><i class="iconfont icon-sousuo dt2"></i></dt>
+			<dd>分类</dd>
+		</dl>
+		<dl id="dl3">
+			<dt><i class="iconfont icon-gouwuche dt3"></i></dt>
+			<dd>购物车</dd>
+		</dl>
+		<dl id="dl4">
+			<dt><i class="iconfont icon-wode dt4"></i></dt>
+			<dd>我的秀</dd>
+		</dl>
+		<dl id="dl5">
+			<dt><i class="iconfont icon-shoucang dt5"></i></dt>
+			<dd>更多</dd>
+			
+		</dl>
+	</footer>
+	<button class="button"></button>
+</body>
+<script type="text/javascript">
+	window.onload=function(){
+			var myScroll=new IScroll('.list',{
+				mouseWheel:true,
+				scrollX:true,
+				scrollY:false
+			})
+			var pro=new IScroll('.section',{
+				mouseWheel:true
+			})
+		
+	
+	//获取商品的 列表
+$('.button').on('tap',function(){	
+	$.ajax({
+		type:"get",
+		url:"http://datainfo.duapp.com/shopdata/getclass.php",
+		dataType:'json',
+		success:function(data){
+		  $.each(data, function(i) { 		   
+		  });
+		}
+	});
+	})
+	// 商品详情:热搜产品加载
+	var classID=0,page=0
+	$.ajax({
+		type:"get",
+		url:" http://datainfo.duapp.com/shopdata/getGoods.php",
+		//data:{classID:classID,pageCode:page,linenumber:6},
+		dataType:'jsonp',
+		success:function(data){	
+		  	 var hot="";
+		  	 $.each(data, function(i) {
+		  	 	 //console.log(data[i].goodsListImg )
+		  	 	 if(data[i].discount==0){
+		  	 	 	data[i].discount=1
+		  	 	 }else{
+		  	 	 	data[i].discount=data[i].discount/10
+		  	 	 }
+             	hot+='<li><img src="'+data[i].goodsListImg+'"/><p class="p1">'+data[i].goodsName+'</p><p class="p2"><span class="price1">￥'+data[i].price+'</span><span class="price">'+parseInt(data[i].price/data[i].discount)+'</span></p></li>'
+		  	    $('#proList').html(hot)
+		  	    $('#proList li').on('tap',function(){
+		  	    	 window.location.href='detail.html?id='+data[$(this).index()].goodsID+'';
+                      pro.refresh()
+		  	    })
+		  	    pro.refresh()
+		  	    
+		  	 });
+		}
+	});
+	
+	
+	// 点击列表页进行切换：
+$('.ul img').hide()
+  $('.ul li').on('tap',function(){
+//	pro.maxScrollY=-428;
+  	var me=this
+  	$(this).css('color','#fff');
+  	$(this).siblings().css('color','#000');
+  	$('.ul img').hide()
+  	$(this).find('img').show()
+  		$.ajax({
+		type:"get",
+		url:" http://datainfo.duapp.com/shopdata/getGoods.php",
+		data:{classID:me.id,className:$('header').html(),pageCode:0},
+		dataType:'jsonp',
+		success:function(data){	
+		  	 var hot="";
+		  	 $.each(data, function(i) {
+		  	 	 if(data[i].discount==0){
+		  	 	 	data[i].discount=1
+		  	 	 }else{
+		  	 	 	data[i].discount=data[i].discount/10
+		  	 	 }
+             	hot+='<li><img src="'+data[i].goodsListImg+'"/><p class="p1">'+data[i].goodsName+'</p><p class="p2"><span class="price1">￥'+data[i].price+'</span><span class="price">'+parseInt(data[i].price/data[i].discount)+'</span></p></li>'
+		  	    $('#proList').html(hot)
+		  	    pro.refresh()
+		  	    $('#proList li').on('tap',function(){
+		  	    	 window.location.href='detail.html?id='+data[$(this).index()].goodsID+'';
+		  	    })
+		  	     $('header span').html(data[i].className)
+		  	 }); 	
+		}
+		
+	});
+	//点击进行累计加载：
+  	var page=0
+  	var max=-428
+  	$(document).on('touchend',function(){ 
+  		if(pro.y>50){
+  			alert('刷新') 
+  		}
+		if(pro.y<pro.maxScrollY-50){
+			page+=1
+//			pro.maxScrollY+=-100
+  	$.ajax({
+		type:"get",
+		url:" http://datainfo.duapp.com/shopdata/getGoods.php",
+		data:{classID:me.id,className:$('header').html(),pageCode:page},
+		dataType:'jsonp',
+		success:function(data){	
+		  	 var hot="";
+		  	 $.each(data, function(i) {
+		  	 	 if(data[i].discount==0){
+		  	 	 	data[i].discount=1
+		  	 	 }else{
+		  	 	 	data[i].discount=data[i].discount/10
+		  	 	 }
+             	hot+='<li><img src="'+data[i].goodsListImg+'"/><p class="p1">'+data[i].goodsName+'</p><p class="p2"><span class="price1">￥'+data[i].price+'</span><span class="price">'+parseInt(data[i].price/data[i].discount)+'</span></p></li>'
+		  	    $('#proList').append(hot)
+		  	    console.log($('#proList'))
+		  	    $('#proList li').on('tap',function(){
+		  	    	 window.location.href='detail.html?id='+data[$(this).index()].goodsID+'';
+		  	    })
+		  	     $('header span').html(data[i].className)
+		  	       pro.refresh()
+ 
+				 
+//		  	     return false
+		  	 });
+		  	
+		}
+	});
+	
+	}
+  	})
+  })
+   $('#dl1').on('tap',function(){
+        	window.location.href='money.html'
+        })
+        $('#dl2').on('tap',function(){
+        	window.location.href='index.html'
+        })
+		$('#dl3').on('tap',function(){
+        	window.location.href='car.html'
+        })
+     $('.shop').on('tap',function(){
+        	window.location.href='car.html'
+        })
+  
+  
+  
+}	
+</script>
+</html>

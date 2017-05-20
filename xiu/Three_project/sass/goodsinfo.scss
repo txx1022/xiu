@@ -1,0 +1,154 @@
+html,body,p{
+    padding: 0;
+    margin: 0;
+}
+
+
+html{
+    width: 100%;
+    height: 100%;
+    body {
+        width: 100%;
+        height: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        header { 
+            width: 100%;
+            height: 48px;
+            background: #A90506;
+            text-align: center;
+            color: #FFFffF;
+            line-height: 48px;
+            font-size: 20px;
+            position: relative;
+           .left {
+               height: 48px;
+               line-height: 48px;
+               font-size: 40px;
+               position: absolute;
+               left: 10px;
+           }
+           .cart {
+               width: 18%;
+               height: 30px;
+               font-size: 30px;
+               position: absolute;
+               right: 12px;
+               top: 10px;
+               border: 1px solid #930E0C;
+               border-radius: 10px;
+           }
+        }  
+        #container {
+            width: 100%;
+            -webkit-box-flex: 1;
+            #ctn {
+                width: 100%;
+                height: 175px;
+                div {
+                    width: 100%;
+                    height: 100%;
+                    div{
+                        width: 100%;
+                        height: 100%;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+                .mark {
+                        width: 100px;
+                        height: 20px;
+                        background: rgba(0,0,0,0.5);
+                        border-radius: 10px;
+                        margin-left: 35%;
+                        .swiper-pagination-bullet-active {
+                                 opacity: 1;
+                                 background: #FFFDEF;
+                             }
+                }
+            }
+            #text {
+                width: 100%;
+                height: 40%;
+                background: #f3eff0;
+                padding: 6% 0;
+                position: relative;
+                .show {
+                    position: absolute;
+                    width: 50%;
+                    height: 40px;
+                    z-index: 2;
+                    left: 25%;
+                    top: 1%;
+                    line-height: 40px;
+                    text-align: center;
+                    background: #E9967A;
+                    border-radius: 10px;
+                    color: #ffffff;
+                    font-size: 14px;
+                    display: none;
+                }
+                p {
+                    width: 90%;
+                    margin-left: 5%;
+                    line-height: 2;
+                }
+                .detailtext {
+                    font-size: 18px;
+                }
+                .price {
+                    font-size: 18px;
+                    .now {
+                        color: red;
+                        font-weight: 600;
+                    }
+                    .pre {
+                        text-decoration: line-through;
+                        margin-left: 6%;
+                    }
+                }
+                .buynumber {
+                    font-size: 20px;
+                }
+            }
+            a {
+                display: block;
+                width: 88%;
+                font-size: 24px;
+                padding: 6%;
+                text-decoration: none;
+                color: #000000;
+                i{
+                    width: 8%;
+                    border-radius: 50%;
+                    background: red;
+                    color:#FFFFFF;
+                    margin-right: 4%;
+                    text-align: center;
+                }
+                span{
+                    margin-left: 30%;
+                }
+            }
+            #iconbutton {
+                width: 100%;
+                height: 80px;
+                background: #a3a3a3;
+                text-align: center;
+                line-height: 80px;
+                button {
+                    width: 70%;
+                    height: 60px;
+                    border-radius: 10px;
+                    border: none;
+                    outline: 0;
+                    font-size: 23px;
+                    color: #FFFFFF;
+                    background: #930E0C;
+                }
+            }
+        } 
+    }
+}

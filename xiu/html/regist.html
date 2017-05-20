@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>register</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<script src="../js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/zepto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../common/iscroll/touch.min.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		body,html{ width: 100%; overflow: hidden; background: #f3eff0 ;}
+		header{ height: 0.88rem; background: #a90506; text-align: center; font-size: 0.3rem; padding-left: 0.27rem;
+		           color: #fff; line-height: 0.88rem; display: flex; align-items: center;  }
+	   header img{ float: left; height: 0.4rem; width: 0.44rem; }
+	   header span{ display: inline-block; width: 100%; text-align: center; margin-left: -0.44rem; }
+	   
+	   
+	   section{ padding: 0.3rem; text-align: center;}
+	   section div{ height:0.85rem; width: 5.80rem; line-height: 0.85rem; margin-bottom: 0.3rem; 
+	   background: #fff; text-align: left; padding-left: 0.2rem; font-size: 0.25rem;}
+	   section span{ color: #505050; }
+	   section input{ color: #9b9b9b; width: 4.3rem; height: 0.85rem; margin-left: 0.1rem;}
+	   section button{ margin-top: 1.52rem; height:0.85rem; width: 5.80rem; background: url(../img/images/regist1.png) repeat-x; color: #fff; line-height: 0.84rem; 
+	         text-align: center; font-size: 0.36rem; }
+	</style>
+</head>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<body>
+	<header>
+		<img src="../img/images/regist.png"/>
+		<span>用户注册</span>
+	</header>
+	<section>
+		<div><span>账户名称：</span><input type="text" name="" id="txt" placeholder="请输入账户" value=""/></div>
+		<div><span>登录密码：</span><input type="password" name="" id="pass" placeholder="请输入密码" value=""/></div>
+		<div><span>账户名称：</span><input type="password" name="" id="sure" placeholder="请确认密码" value=""/></div>
+		<button id="btn">确认注册</button>
+	</section>
+</body>
+<script type="text/javascript">
+$('#btn').on("tap",function(){		 
+	$.ajax({
+		type:"get",
+		url:" http://datainfo.duapp.com/shopdata/userinfo.php", 
+		data:{status:'register',userID:$('#txt').val(),password:$('#pass').val()},
+			dataType:'json',
+			success:function(data){
+				if(data==0){
+					alert('用户名重名')
+				}
+				if(data==1){
+					alert('注册成功')
+					window.location.href='login.html'
+				}
+				if(data==2){
+					alert('数据库报错')
+				}
+			}
+			
+	});
+	
+})
+</script>
+</html>
